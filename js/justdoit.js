@@ -1,64 +1,101 @@
-function timeForTime() {
+
     var data = [356, 413, 703, 416, 275, 182, 168, 138, 114, 130, 153, 326, 373, 383, 395, 383, 181];
 
-    // set the dimensions and margins of the graph
-    var margin = { top: 20, right: 20, bottom: 30, left: 50 },
-        width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
 
-    // parse the date / time
-    var parseTime = d3.timeParse("%d-%b-%y");
+// 2. Definerer SVG plassering og marginer
+var margin = { top: 50, right: 50, bottom: 50, left: 50 }
+    , width = window.innerWidth - margin.left - margin.right // Use the window's width 
+    , height = window.innerHeight - margin.top - margin.bottom; // Use the window's height
 
-    // set the ranges
-    var x = d3.scaleTime().range([0, width]);
-    var y = d3.scaleLinear().range([height, 0]);
+// Antall datapoints
+var n = data.length;
 
-    // define the line
-    var valueline = d3.line()
-        .x(function (d) { return x(d.date); })
-        .y(function (d) { return y(d.close); });
+// 5. X skala - index av data
+var xScale = d3.scaleLinear()
+    .domain([0, n - 1]) // input
+    .range([0, width]); // output
 
-    // append the svg obgect to the body of the page
-    // appends a 'group' element to 'svg'
-    // moves the 'group' element to the top left margin
-    var svg = d3.select("body").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+// Y skala - verdi av data
+var maxVerdi = Math.max.apply(null, data);
+var yScale = d3.scaleLinear()
+    .domain([0, maxVerdi]) // input 
+    .range([height, 0]); // output 
 
-    // Get the data
-    d3.csv("data.csv", function (error, data) {
-        if (error) throw error;
+// 7. d3's line generator
+var line = d3.line()
+    .x(function (d, i) { return xScale(i); }) // set the x values for the line generator
+    .y(function (d) { return yScale(d); }) // set the y values for the line generator 
+    .curve(d3.curveMonotoneX) // apply smoothing to the line
 
-        // format the data
-        data.forEach(function (d) {
-            d.date = parseTime(d.date);
-            d.close = +d.close;
-        });
+// 8. An array of objects of length N. Each object has key -> value pair, the key being "y" and the value is a random number
+var dataset = d3.range(n).map(function (d) { return { "y": d3.randomUniform(1)() } })
 
-        // Scale the range of the data
-        x.domain(d3.extent(data, function (d) { return d.date; }));
-        y.domain([0, d3.max(data, function (d) { return d.close; })]);
+// 1. Add the SVG to the page and employ #2
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        // Add the valueline path.
-        svg.append("path")
-            .data([data])
-            .attr("class", "line")
-            .attr("d", valueline);
+// 3. Call the x axis in a group tag
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(xScale)); // Create an axis component with d3.axisBottom
 
-        // Add the X Axis
-        svg.append("g")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
+// 4. Call the y axis in a group tag
+svg.append("g")
+    .attr("class", "y axis")
+    .call(d3.axisLeft(yScale)); // Create an axis component with d3.axisLeft
 
-        // Add the Y Axis
-        svg.append("g")
-            .call(d3.axisLeft(y));
+// 9. Append the path, bind the data, and call the line generator 
+svg.append("path")
+    .datum(data) // 10. Binds data to the line 
+    .attr("class", "line") // Assign a class for styling 
+    .attr("d", line); // 11. Calls the line generator 
 
-    });
+// 12. Appends a circle for each datapoint 
+svg.selectAll(".dot")
+    .data(data)
+    .enter().append("circle") // Uses the enter().append() method
+    .attr("class", "dot") // Assign a class for styling
+    .attr("cx", function (d, i) { return xScale(i) })
+    .attr("cy", function (d) { return yScale(d) })
+    .attr("r", 5)
+    .on("mouseover", function (a, b, c) {
+        console.log(a)
+        $(this).attr('class', 'focus')
+    })
+    .on("mouseout", function () { })
+       .on("mousemove", mousemove);
 
+   var focus = svg.append("g")
+       .attr("class", "focus")
+       .style("display", "none");
 
+   focus.append("circle")
+       .attr("r", 4.5);
+
+   focus.append("text")
+       .attr("x", 9)
+       .attr("dy", ".35em");
+
+   svg.append("rect")
+       .attr("class", "overlay")
+       .attr("width", width)
+       .attr("height", height)
+       .on("mouseover", function() { focus.style("display", null); })
+       .on("mouseout", function() { focus.style("display", "none"); })
+       .on("mousemove", mousemove);
+
+/*
+   function mousemove() {
+     var x0 = x.invert(d3.mouse(this)[0]),
+         i = bisectDate(data, x0, 1),
+         d0 = data[i - 1],
+         d1 = data[i],
+         d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+     focus.attr("transform", "translate(" + x(d.date) + "," + y(d.close) + ")");
+     focus.select("text").text(d);
 }
-
+*/
