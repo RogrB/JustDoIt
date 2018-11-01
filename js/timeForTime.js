@@ -27,11 +27,8 @@ var line = d3.line()
     .y(function (d) { return yScale(d); }) // set the y values for the line generator 
     .curve(d3.curveMonotoneX) // apply smoothing to the line
 
-// 8. An array of objects of length N. Each object has key -> value pair, the key being "y" and the value is a random number
-var dataset = d3.range(n).map(function (d) { return { "y": d3.randomUniform(1)() } })
-
 // 1. Add the SVG to the page and employ #2
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#timeForTime").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
