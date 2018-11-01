@@ -1,6 +1,6 @@
+// Time for time - lineChart
 
-    var data = [356, 413, 703, 416, 275, 182, 168, 138, 114, 130, 153, 326, 373, 383, 395, 383, 181];
-
+var data = [356, 413, 703, 416, 275, 182, 168, 138, 114, 130, 153, 326, 373, 383, 395, 383, 181];
 
 // 2. Definerer SVG plassering og marginer
 var margin = { top: 50, right: 50, bottom: 50, left: 50 }
@@ -86,7 +86,11 @@ svg.selectAll(".dot")
        .attr("height", height)
        .on("mouseover", function() { focus.style("display", null); })
        .on("mouseout", function() { focus.style("display", "none"); })
-       .on("mousemove", mousemove);
+    .on("mousemove", mousemove);
+
+function mousemove() {
+    
+}
 
 /*
    function mousemove() {
@@ -99,3 +103,7 @@ svg.selectAll(".dot")
      focus.select("text").text(d);
 }
 */
+
+
+
+
