@@ -16,7 +16,7 @@ $.ajax({
 function tellOrd(str) {
     var ordTellerRaw = {};
     var ord = str.split(/\b/);
-    var children = [];
+    var subArray = [];
 
     for (var i = 0; i < ord.length; i++) {
         if (ord[i].length > 2) {
@@ -26,21 +26,21 @@ function tellOrd(str) {
     }
 
     for (var ordData in ordTellerRaw) {
-        children.push({
+        subArray.push({
             "ord": ordData,
             "antall": ordTellerRaw[ordData]
         });
     }
 
-    children.sort(function (a, b) {
+    subArray.sort(function (a, b) {
         return parseFloat(b.antall) - parseFloat(a.antall);
     });
 
-    children.length = 50;
-    antallOrd.children = children;
+    subArray.length = 50;
+    antallOrd.children = subArray;
 }
 
-console.log(antallOrd);
+//console.log(antallOrd);
 
 dataset = {
     "children": [{
@@ -64,7 +64,7 @@ dataset = {
     }]
 };
 
-console.log(dataset);
+//console.log(dataset.children[0]);
 
 var diameter = 600;
 var color = d3.scaleOrdinal(d3.schemeCategory20);

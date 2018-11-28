@@ -1,22 +1,22 @@
 // Time for time - lineChart
 
-var data = [356, 413, 703, 416, 275, 182, 168, 138, 114, 130, 153, 326, 373, 383, 395, 383, 181];
+var timeData = [356, 413, 703, 416, 275, 182, 168, 138, 114, 130, 153, 326, 373, 383, 395, 383, 181];
 
 // 2. Definerer SVG plassering og marginer
 var margin = { top: 50, right: 50, bottom: 50, left: 50 }
     , width = window.innerWidth - margin.left - margin.right // Use the window's width 
     , height = window.innerHeight - margin.top - margin.bottom; // Use the window's height
 
-// Antall datapoints
-var n = data.length;
+// Antall timeDatapoints
+var n = timeData.length;
 
-// 5. X skala - index av data
+// 5. X skala - index av Data
 var xScale = d3.scaleLinear()
     .domain([0, n - 1]) // input
     .range([0, width]); // output
 
-// Y skala - verdi av data
-var maxVerdi = Math.max.apply(null, data);
+// Y skala - verdi av Data
+var maxVerdi = Math.max.apply(null, timeData);
 var yScale = d3.scaleLinear()
     .domain([0, maxVerdi]) // input 
     .range([height, 0]); // output 
@@ -45,15 +45,15 @@ svg.append("g")
     .attr("class", "y axis")
     .call(d3.axisLeft(yScale)); // Create an axis component with d3.axisLeft
 
-// 9. Append the path, bind the data, and call the line generator 
+// 9. Append the path, bind the ata, and call the line generator 
 svg.append("path")
-    .datum(data) // 10. Binds data to the line 
+    .datum(timeData) // 10. Binds data to the line 
     .attr("class", "line") // Assign a class for styling 
     .attr("d", line); // 11. Calls the line generator 
 
-// 12. Appends a circle for each datapoint 
+// 12. Appends a circle for each Datapoint 
 svg.selectAll(".dot")
-    .data(data)
+    .data(timeData)
     .enter().append("circle") // Uses the enter().append() method
     .attr("class", "dot") // Assign a class for styling
     .attr("cx", function (d, i) { return xScale(i) })
@@ -92,9 +92,9 @@ function mousemove() {
 /*
    function mousemove() {
      var x0 = x.invert(d3.mouse(this)[0]),
-         i = bisectDate(data, x0, 1),
-         d0 = data[i - 1],
-         d1 = data[i],
+         i = bisectDate(timeData, x0, 1),
+         d0 = timeData[i - 1],
+         d1 = timeData[i],
          d = x0 - d0.date > d1.date - x0 ? d1 : d0;
      focus.attr("transform", "translate(" + x(d.date) + "," + y(d.close) + ")");
      focus.select("text").text(d);

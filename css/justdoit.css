@@ -1,5 +1,5 @@
-﻿body
-{
+﻿body {
+    font-family: 'Open Sans', sans-serif;
 }
 
 /* 13. Basic Styling with CSS */
@@ -25,4 +25,25 @@
 .focus circle {
     fill: none;
     stroke: steelblue;
+}
+
+
+
+
+
+div#layout {
+    text-align: center;
+}
+
+div#container {
+    width: 700px;
+    height: 500px;
+    margin: auto;
+    background-color: #2F4A6D;
+}
+
+
+
+.bar {
+    fill: steelblue;
 }
