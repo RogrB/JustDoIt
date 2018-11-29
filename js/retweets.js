@@ -57,6 +57,7 @@ function tegnRetweetsBarChart(retweets) {
     var svg = d3.select("#retweets").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
+        .attr("id", "retweetSVG")
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
@@ -74,7 +75,10 @@ function tegnRetweetsBarChart(retweets) {
         //.attr("x", function(d) { return x(d.sales); })
         .attr("width", function (d) { return x(d.antall); })
         .attr("y", function (d) { return y(d.forfatter); })
-        .attr("height", y.bandwidth());
+        .attr("height", y.bandwidth())
+        .on("mouseover", function (d) { visRetweet(d); })
+        .on("mouseout", function () { fjernRetweet(); })
+        .on("click", function (d) { printRetweet(d); });
 
     // add the x Axis
     svg.append("g")
@@ -87,3 +91,29 @@ function tegnRetweetsBarChart(retweets) {
 
 }
 
+function visRetweet(d) {
+    var svg = d3.select("#retweetSVG")
+        .append("circle")
+    .attr("cx", 20)
+    .attr("cy", 20)
+        .attr("r", 20)
+        .attr("class", "test")
+    .style("fill", "black");
+}
+
+function fjernRetweet() {
+    var svg = d3.select(".test").remove();
+}
+
+function printRetweet(d) {
+    var output = "";
+    output += "<p>" + d.antall + " retweets</p>";
+    output += "<p>" + d.tweet + "</p>";
+    output += "<p>Skrevet av: " + d.forfatter + "</p>";
+    output += "<button onclick='fjernPrintRetweet()' class='btn btn-info'>Fjern</button>";
+    $("#retweetTarget").html(output);
+}
+
+function fjernPrintRetweet() {
+    $("#retweetTarget").html("");
+}
