@@ -22,6 +22,7 @@ function sorterRetweets(str) {
         var tweet = linjer[i].substr(linjer[i].indexOf(" ") + 1); // må fjerne første og de 2 siste ordene
         tweet = tweet.substring(0, tweet.lastIndexOf(" "));
         tweet = tweet.substring(0, tweet.lastIndexOf(" ")); // To ganger for å fjerne | seperatør og forfatter
+        tweet = fjernTags(tweet);
         var forfatter = linje[linje.length - 2]; // nest siste ordet i linja
         retweets.push({
             "antall": antall,
@@ -35,6 +36,12 @@ function sorterRetweets(str) {
 
     retweets.length = 50;
     tegnRetweetsBarChart(retweets);
+}
+
+// Filtrerer ut @ tags i tweeten
+function fjernTags(str) {
+    var regexp = new RegExp('@([^\\s]*)', 'g');
+    return str.replace(regexp, ' ');
 }
 
 function tegnRetweetsBarChart(retweets) {
@@ -92,17 +99,56 @@ function tegnRetweetsBarChart(retweets) {
 }
 
 function visRetweet(d) {
-    var svg = d3.select("#retweetSVG")
-        .append("circle")
-    .attr("cx", 20)
-    .attr("cy", 20)
-        .attr("r", 20)
-        .attr("class", "test")
-    .style("fill", "black");
+    var svg = d3.select("#retweetSVG");
+    svg.style("cursor", "pointer");
+    svg .append("rect")
+        .attr("x", (svg.attr("width")/2) - 300)
+        .attr("y", (svg.attr("height") / 2) - 200)
+        .attr("width", 600)
+        .attr("height", 250)
+        .attr("fill", d3.rgb(55, 66, 84))
+        .attr("stroke", "#2378ae")
+        .attr("stroke-linecap", "butt")
+        .attr("stroke-width", "3")
+        .attr("class", "infoBoks");
+
+    svg.append("text")
+        .attr("y", (svg.attr("height") / 2) - 170)
+        .attr("x", (svg.attr("width") / 2) - 290)
+        .attr("text-anchor", "start")
+        .attr("class", "infoBoks")
+        .style("font-size", "30px")
+        .style("font-family", "'Time New Roman', Times, serif")
+        .style("fill", "white")
+        .text(d.forfatter + ":");
+
+    svg.append("text")
+        .attr("y", (svg.attr("height") / 2) - 170)
+        .attr("x", (svg.attr("width") / 2) + 290)
+        .attr("text-anchor", "end")
+        .attr("class", "infoBoks")
+        .style("font-size", "24px")
+        .style("font-family", "'Time New Roman', Times, serif")
+        .style("fill", "white")
+        .text(d.antall + " retweets");
+
+    svg.append("foreignObject")
+        .attr("y", (svg.attr("height") / 2) - 140)
+        .attr("x", (svg.attr("width") / 2) - 290)
+        .attr("width", 580)
+        .attr("height", 200)
+        .attr("text-anchor", "start")
+        .attr("class", "infoBoks")
+        .style("font-size", "18px")
+        .style("font-family", "'Time New Roman', Times, serif")
+        .style("fill", "white")
+        .html('<div class="tweetTekst"><p>' + d.tweet + '</p></div>');
+    
 }
 
 function fjernRetweet() {
-    var svg = d3.select(".test").remove();
+    var infoBoks = d3.selectAll(".infoBoks").remove();
+    var svg = d3.select("#retweetSVG").style("cursor", "initial");
 }
 
 function printRetweet(d) {
@@ -116,4 +162,13 @@ function printRetweet(d) {
 
 function fjernPrintRetweet() {
     $("#retweetTarget").html("");
+}
+
+function brytOppTekst(str) {
+    var result = '';
+    while (str.length > 0) {
+        result += str.substring(0, 200) + '\r\n';
+        str = str.substring(200);
+    }
+    return result;
 }
