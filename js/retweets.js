@@ -1,20 +1,20 @@
 
 $.ajax({
     type: "GET",
-    url: 'data/favoritter.txt',
+    url: 'data/retweeted.txt',
     async: true,
     dataType: 'text',
     contentType: "text/plain",
     crossDomain: true,
     success: function (data) {
-        sorterFavoritter(data);
+        sorterRetweets(data);
     }
 });
 
 
 
-function sorterFavoritter(str) {
-    var favoritter = [];
+function sorterRetweets(str) {
+    var retweets = [];
     var linjer = str.split('|');
     for (var i = 0; i < linjer.length; i++) {
         var linje = linjer[i].split(" ");
@@ -23,27 +23,21 @@ function sorterFavoritter(str) {
         tweet = tweet.substring(0, tweet.lastIndexOf(" "));
         tweet = tweet.substring(0, tweet.lastIndexOf(" ")); // To ganger for å fjerne | seperatør og forfatter
         var forfatter = linje[linje.length - 2]; // nest siste ordet i linja
-
-        favoritter.push({
+        retweets.push({
             "antall": antall,
             "forfatter": forfatter,
-            "tweet" : tweet
+            "tweet": tweet
         });
-        
     }
-
-    favoritter.sort(function (a, b) {
+    retweets.sort(function (a, b) {
         return parseFloat(b.antall) - parseFloat(a.antall);
     });
-    
-    favoritter.length = 50;
-    tegnFavoritterBarChart(favoritter);
+
+    retweets.length = 50;
+    tegnRetweetsBarChart(retweets);
 }
 
-// Temp array for å problemsøke
-//var favoritter2 = [{ "antall": 187, "forfatter": "julenissen", "tweet": "testeste" }, { "antall": 87, "forfatter": "sibbe", "tweet": "testeste" }, { "antall": 56, "forfatter": "sausenebb", "tweet": "testeste" }, { "antall": 23, "forfatter": "groms", "tweet": "testeste" }, { "antall": 69, "forfatter": "skrotmuffin", "tweet": "testeste" }];
-
-function tegnFavoritterBarChart(favoritter) {
+function tegnRetweetsBarChart(retweets) {
     // set the dimensions and margins of the graph
     var margin = { top: 20, right: 20, bottom: 30, left: 40 },
         width = 960 - margin.left - margin.right,
@@ -60,7 +54,7 @@ function tegnFavoritterBarChart(favoritter) {
     // append the svg object to the body of the page
     // append a 'group' element to 'svg'
     // moves the 'group' element to the top left margin
-    var svg = d3.select("#favoritter").append("svg")
+    var svg = d3.select("#retweets").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -69,12 +63,12 @@ function tegnFavoritterBarChart(favoritter) {
 
 
     // Scale the range of the data in the domains
-    x.domain([0, d3.max(favoritter, function (d) { return d.antall; })]);
-    y.domain(favoritter.map(function (d) { return d.forfatter; }));
+    x.domain([0, d3.max(retweets, function (d) { return d.antall; })]);
+    y.domain(retweets.map(function (d) { return d.forfatter; }));
 
     // append the rectangles for the bar chart
     svg.selectAll(".bar")
-        .data(favoritter)
+        .data(retweets)
         .enter().append("rect")
         .attr("class", "bar")
         //.attr("x", function(d) { return x(d.sales); })
