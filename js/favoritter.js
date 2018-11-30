@@ -1,4 +1,4 @@
-
+// Favoritter - Bar chart
 $.ajax({
     type: "GET",
     url: 'data/favoritter.txt',

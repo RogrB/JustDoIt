@@ -1,4 +1,4 @@
-
+// Retweets - Bar chart
 $.ajax({
     type: "GET",
     url: 'data/retweeted.txt',
@@ -36,12 +36,6 @@ function sorterRetweets(str) {
 
     retweets.length = 50;
     tegnRetweetsBarChart(retweets);
-}
-
-// Filtrerer ut @ tags i tweeten
-function fjernTags(str) {
-    var regexp = new RegExp('@([^\\s]*)', 'g');
-    return str.replace(regexp, ' ');
 }
 
 function tegnRetweetsBarChart(retweets) {

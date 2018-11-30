@@ -1,5 +1,4 @@
 // Antall Ord - Bubble chart
-var antallOrd = { "children" : [] };
 
 $.ajax({
     type: "GET",
@@ -16,32 +15,94 @@ $.ajax({
 function tellOrd(str) {
     var ordTellerRaw = {};
     var ord = str.split(/\b/);
-    var subArray = [];
+    var antallOrd = [];
 
     for (var i = 0; i < ord.length; i++) {
         if (ord[i].length > 2) {
             ord[i] = ord[i].toLowerCase();
-            ordTellerRaw["_" + ord[i]] = (ordTellerRaw["_" + ord[i]] || 0) + 1;
+            ordTellerRaw[ord[i]] = (ordTellerRaw[ord[i]] || 0) + 1;
         }
     }
 
     for (var ordData in ordTellerRaw) {
-        subArray.push({
+        antallOrd.push({
             "ord": ordData,
             "antall": ordTellerRaw[ordData]
         });
     }
 
-    subArray.sort(function (a, b) {
+    antallOrd.sort(function (a, b) {
         return parseFloat(b.antall) - parseFloat(a.antall);
     });
 
-    subArray.length = 50;
-    antallOrd.children = subArray;
+    antallOrd.length = 50;
+    var output = {
+        "children": []
+    };
+    output.children = antallOrd;
+    tegnAntallOrd(output);
 }
 
-//console.log(antallOrd);
+function tegnAntallOrd(data) {
+    var diameter = 600;
+    var color = d3.scaleOrdinal(d3.schemeCategory20);
 
+    var bubble = d3.pack(data)
+    .size([diameter, diameter])
+    .padding(1.5);
+
+    var svg = d3.select("#antallOrd")
+        .append("svg")
+        .attr("width", diameter)
+        .attr("height", diameter)
+        .attr("id", "antallOrdSVG")
+        .attr("class", "bubble");
+
+    var nodes = d3.hierarchy(data)
+        .sum(function (d) { return d.antall; });
+
+    var node = svg.selectAll(".node")
+        .data(bubble(nodes).descendants())
+        .enter()
+        .filter(function (d) {
+            return !d.children;
+        })
+        .append("g")
+        .attr("class", "node")
+        .attr("transform", function (d) {
+            return "translate(" + d.x + "," + d.y + ")";
+        });
+
+    node.append("title")
+        .text(function (d) {
+            return d.ord + ": " + d.antall;
+        });
+
+    node.append("circle")
+        .attr("r", function (d) {
+            //console.log(d);
+            return d.r;
+        })
+        .style("fill", function (d) {
+            return "blue";
+            //return color(d.facilityId);
+        });
+
+    node.append("text")
+        .attr("dy", ".3em")
+        .style("text-anchor", "middle")
+        .text(function (d) {
+            return d.data.ord.substring(0, d.r / 3) + ": " + d.data.antall;
+        });
+
+
+
+    d3.select(self.frameElement)
+        .style("height", diameter + "px");
+}
+
+
+/*
 dataset = {
     "children": [{
         "facilityId": "FAC0001",
@@ -64,15 +125,12 @@ dataset = {
     }]
 };
 
-//console.log(dataset.children[0]);
-
+//console.log(dataset);
 var diameter = 600;
-var color = d3.scaleOrdinal(d3.schemeCategory20);
-
 var bubble = d3.pack(dataset)
     .size([diameter, diameter])
     .padding(1.5);
-var svg = d3.select("#antallOrd")
+var infoBoksSVG = d3.select("#antallOrd")
     .append("svg")
     .attr("width", diameter)
     .attr("height", diameter)
@@ -81,7 +139,7 @@ var svg = d3.select("#antallOrd")
 var nodes = d3.hierarchy(dataset)
     .sum(function (d) { return d.responseCount; });
 
-var node = svg.selectAll(".node")
+var node = infoBoksSVG.selectAll(".node")
     .data(bubble(nodes).descendants())
     .enter()
     .filter(function (d) {
@@ -101,54 +159,4 @@ node.append("circle")
         return "blue";
         //return color(d.facilityId);
     });
-/*
-var bubble = d3.pack(dataset)
-    .size([diameter, diameter])
-    .padding(1.5);
-var svg = d3.select("#antallOrd")
-    .append("svg")
-    .attr("width", diameter)
-    .attr("height", diameter)
-    .attr("class", "bubble");
-
-var nodes = d3.hierarchy(dataset)
-    .sum(function (d) { return d.responseCount; });
-
-var node = svg.selectAll(".node")
-    .data(bubble(nodes).descendants())
-    .enter()
-    .filter(function (d) {
-        return !d.children;
-    })
-    .append("g")
-    .attr("class", "node")
-    .attr("transform", function (d) {
-        return "translate(" + d.x + "," + d.y + ")";
-    });
-
-node.append("title")
-    .text(function (d) {
-        return d.facilityId + ": " + d.responseCount;
-    });
-
-node.append("circle")
-    .attr("r", function (d) {
-        return d.r;
-    })
-    .style("fill", function (d) {
-        return "blue";
-        //return color(d.facilityId);
-    });
-
-node.append("text")
-    .attr("dy", ".3em")
-    .style("text-anchor", "middle")
-    .text(function (d) {
-        return d.data.facilityId.substring(0, d.r / 3) + ": " + d.data.responseCount;
-    });
-
-
-*/
-d3.select(self.frameElement)
-    .style("height", diameter + "px");
-
+    */
