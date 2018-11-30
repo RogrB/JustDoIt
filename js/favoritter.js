@@ -22,6 +22,7 @@ function sorterFavoritter(str) {
         var tweet = linjer[i].substr(linjer[i].indexOf(" ") + 1); // m� fjerne f�rste og de 2 siste ordene
         tweet = tweet.substring(0, tweet.lastIndexOf(" "));
         tweet = tweet.substring(0, tweet.lastIndexOf(" ")); // To ganger for � fjerne | seperat�r og forfatter
+        tweet = fjernTags(tweet);
         var forfatter = linje[linje.length - 2]; // nest siste ordet i linja
 
         favoritter.push({
@@ -38,6 +39,12 @@ function sorterFavoritter(str) {
     
     favoritter.length = 50;
     tegnFavoritterBarChart(favoritter);
+}
+
+// Filtrerer ut @ tags i tweeten
+function fjernTags(str) {
+    var regexp = new RegExp('@([^\\s]*)', 'g');
+    return str.replace(regexp, ' ');
 }
 
 // Temp array for � problems�ke
