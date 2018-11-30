@@ -18,10 +18,10 @@ function sorterRetweets(str) {
     var linjer = str.split('|');
     for (var i = 0; i < linjer.length; i++) {
         var linje = linjer[i].split(" ");
-        var antall = parseInt(linje[0]); // første ordet i linja
-        var tweet = linjer[i].substr(linjer[i].indexOf(" ") + 1); // må fjerne første og de 2 siste ordene
+        var antall = parseInt(linje[0]); // fï¿½rste ordet i linja
+        var tweet = linjer[i].substr(linjer[i].indexOf(" ") + 1); // mï¿½ fjerne fï¿½rste og de 2 siste ordene
         tweet = tweet.substring(0, tweet.lastIndexOf(" "));
-        tweet = tweet.substring(0, tweet.lastIndexOf(" ")); // To ganger for å fjerne | seperatør og forfatter
+        tweet = tweet.substring(0, tweet.lastIndexOf(" ")); // To ganger for ï¿½ fjerne | seperatï¿½r og forfatter
         tweet = fjernTags(tweet);
         var forfatter = linje[linje.length - 2]; // nest siste ordet i linja
         retweets.push({
@@ -79,13 +79,13 @@ function tegnRetweetsBarChart(retweets) {
         .data(retweets)
         .enter().append("rect")
         .attr("class", "bar")
-        //.attr("x", function(d) { return x(d.sales); })
         .attr("width", function (d) { return x(d.antall); })
         .attr("y", function (d) { return y(d.forfatter); })
         .attr("height", y.bandwidth())
-        .on("mouseover", function (d) { visRetweet(d); })
-        .on("mouseout", function () { fjernRetweet(); })
-        .on("click", function (d) { printRetweet(d); });
+        .on("mouseover", function (d) { infoBoks(d, "retweet"); })
+        .on("mouseout", function () { fjernInfoBoks(); })
+        .on("click", function (d) { printTweet(d, "retweet"); })
+        .on("touchstart", function (d) { printTweet(d, "retweet"); });
 
     // add the x Axis
     svg.append("g")
@@ -98,72 +98,7 @@ function tegnRetweetsBarChart(retweets) {
 
 }
 
-function visRetweet(d) {
-    var svg = d3.select("#retweetSVG");
-    svg.style("cursor", "pointer");
-    svg .append("rect")
-        .attr("x", (svg.attr("width")/2) - 300)
-        .attr("y", (svg.attr("height") / 2) - 200)
-        .attr("width", 600)
-        .attr("height", 250)
-        .attr("fill", d3.rgb(55, 66, 84))
-        .attr("stroke", "#2378ae")
-        .attr("stroke-linecap", "butt")
-        .attr("stroke-width", "3")
-        .attr("class", "infoBoks");
-
-    svg.append("text")
-        .attr("y", (svg.attr("height") / 2) - 170)
-        .attr("x", (svg.attr("width") / 2) - 290)
-        .attr("text-anchor", "start")
-        .attr("class", "infoBoks")
-        .style("font-size", "30px")
-        .style("font-family", "'Time New Roman', Times, serif")
-        .style("fill", "white")
-        .text(d.forfatter + ":");
-
-    svg.append("text")
-        .attr("y", (svg.attr("height") / 2) - 170)
-        .attr("x", (svg.attr("width") / 2) + 290)
-        .attr("text-anchor", "end")
-        .attr("class", "infoBoks")
-        .style("font-size", "24px")
-        .style("font-family", "'Time New Roman', Times, serif")
-        .style("fill", "white")
-        .text(d.antall + " retweets");
-
-    svg.append("foreignObject")
-        .attr("y", (svg.attr("height") / 2) - 140)
-        .attr("x", (svg.attr("width") / 2) - 290)
-        .attr("width", 580)
-        .attr("height", 200)
-        .attr("text-anchor", "start")
-        .attr("class", "infoBoks")
-        .style("font-size", "18px")
-        .style("font-family", "'Time New Roman', Times, serif")
-        .style("fill", "white")
-        .html('<div class="tweetTekst"><p>' + d.tweet + '</p></div>');
-    
-}
-
-function fjernRetweet() {
-    var infoBoks = d3.selectAll(".infoBoks").remove();
-    var svg = d3.select("#retweetSVG").style("cursor", "initial");
-}
-
-function printRetweet(d) {
-    var output = "";
-    output += "<p>" + d.antall + " retweets</p>";
-    output += "<p>" + d.tweet + "</p>";
-    output += "<p>Skrevet av: " + d.forfatter + "</p>";
-    output += "<button onclick='fjernPrintRetweet()' class='btn btn-info'>Fjern</button>";
-    $("#retweetTarget").html(output);
-}
-
-function fjernPrintRetweet() {
-    $("#retweetTarget").html("");
-}
-
+/*
 function brytOppTekst(str) {
     var result = '';
     while (str.length > 0) {
@@ -172,3 +107,4 @@ function brytOppTekst(str) {
     }
     return result;
 }
+*/

@@ -18,10 +18,10 @@ function sorterFavoritter(str) {
     var linjer = str.split('|');
     for (var i = 0; i < linjer.length; i++) {
         var linje = linjer[i].split(" ");
-        var antall = parseInt(linje[0]); // første ordet i linja
-        var tweet = linjer[i].substr(linjer[i].indexOf(" ") + 1); // må fjerne første og de 2 siste ordene
+        var antall = parseInt(linje[0]); // fï¿½rste ordet i linja
+        var tweet = linjer[i].substr(linjer[i].indexOf(" ") + 1); // mï¿½ fjerne fï¿½rste og de 2 siste ordene
         tweet = tweet.substring(0, tweet.lastIndexOf(" "));
-        tweet = tweet.substring(0, tweet.lastIndexOf(" ")); // To ganger for å fjerne | seperatør og forfatter
+        tweet = tweet.substring(0, tweet.lastIndexOf(" ")); // To ganger for ï¿½ fjerne | seperatï¿½r og forfatter
         var forfatter = linje[linje.length - 2]; // nest siste ordet i linja
 
         favoritter.push({
@@ -40,7 +40,7 @@ function sorterFavoritter(str) {
     tegnFavoritterBarChart(favoritter);
 }
 
-// Temp array for å problemsøke
+// Temp array for ï¿½ problemsï¿½ke
 //var favoritter2 = [{ "antall": 187, "forfatter": "julenissen", "tweet": "testeste" }, { "antall": 87, "forfatter": "sibbe", "tweet": "testeste" }, { "antall": 56, "forfatter": "sausenebb", "tweet": "testeste" }, { "antall": 23, "forfatter": "groms", "tweet": "testeste" }, { "antall": 69, "forfatter": "skrotmuffin", "tweet": "testeste" }];
 
 function tegnFavoritterBarChart(favoritter) {
@@ -63,6 +63,7 @@ function tegnFavoritterBarChart(favoritter) {
     var svg = d3.select("#favoritter").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
+        .attr("id", "favoritterSVG")
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
@@ -77,10 +78,13 @@ function tegnFavoritterBarChart(favoritter) {
         .data(favoritter)
         .enter().append("rect")
         .attr("class", "bar")
-        //.attr("x", function(d) { return x(d.sales); })
         .attr("width", function (d) { return x(d.antall); })
         .attr("y", function (d) { return y(d.forfatter); })
-        .attr("height", y.bandwidth());
+        .attr("height", y.bandwidth())
+        .on("mouseover", function (d) { infoBoks(d, "favoritter"); })
+        .on("mouseout", function () { fjernInfoBoks(); })
+        .on("click", function (d) { printTweet(d, "favoritter"); })
+        .on("touchstart", function (d) { printTweet(d, "favoritter"); });
 
     // add the x Axis
     svg.append("g")
