@@ -11,8 +11,6 @@ $.ajax({
     }
 });
 
-
-
 function sorterRetweets(str) {
     var retweets = [];
     var linjer = str.split('|');

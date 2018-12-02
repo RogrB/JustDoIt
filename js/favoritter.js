@@ -12,7 +12,6 @@ $.ajax({
 });
 
 
-
 function sorterFavoritter(str) {
     var favoritter = [];
     var linjer = str.split('|');
