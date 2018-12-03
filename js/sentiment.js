@@ -2,7 +2,8 @@
 function sentiment(data) {
     var afinn = $.extend(afinn_en, afinn_emoticon);
     var positive = [];
-    var negative = []
+    var negative = [];
+    var tweets = [];
     for(var i = 0; i < 20; i++) {
         positive[i] = 0;
         negative[i] = 0;
@@ -20,13 +21,11 @@ function sentiment(data) {
         }
         if(setningsVurdering < 0) negative[Math.abs(setningsVurdering)]++;
         if(setningsVurdering > 0) positive[setningsVurdering]++;
+        tweets.push(leggTilTweet(linje, setningsVurdering));
     }
     negative = konverterTilNegativeTall(negative);
-    //negative = fjernNullVerdier(negative);
-    //positive = fjernNullVerdier(positive);
-    console.log("positive " + positive);
-    console.log("negative " + negative);
-    tegnSentimentChart(negative.concat(positive));
+    sorterSentimentTweets(tweets);
+    tegnSentimentChart(positive, negative);
 }
 
 function konverterTilNegativeTall(arr) {
@@ -36,19 +35,32 @@ function konverterTilNegativeTall(arr) {
     return arr;
 }
 
-function fjernNullVerdier(arr) {
-    var i = arr.length;
-    while (i--) {
-        if (arr[i] === 0) {
-            arr.splice(i, 1);
-        }
-    }
-    return arr;
+function leggTilTweet(linje, vurdering) {
+    return {
+        "tweet": linje,
+        "sentiment": vurdering
+    };
 }
 
+function sorterSentimentTweets(tweets) {
+    tweets.sort(function (a, b) {
+        return parseFloat(b.sentiment) - parseFloat(a.sentiment);
+    });
+    hentTopLister(tweets);
+}
 
+function hentTopLister(tweets) {
+    var negativeTweets = tweets.slice(-5);
+    var posititiveTweets = tweets
+    posititiveTweets.length = 5;
+    visToplister(negativeTweets, posititiveTweets);
+}
 
-function tegnSentimentChart(data) {
+function visToplister(negativeTweets, posititiveTweets) {
+
+}
+
+function tegnSentimentChart(positive, negative) {
     //var data = [100, -100, -150, 55, 150, 120, 450, 980, 1200];
 
     var leftMargin = 50;  // Space to the left of first bar; accomodates y-axis labels
@@ -56,19 +68,19 @@ function tegnSentimentChart(data) {
     var margin = {left: leftMargin, right: rightMargin, top: 10, bottom: 10};
     var barWidth = 30;  // Width of the bars
     var chartHeight = 350;  // Height of chart, from x-axis (ie. y=0)
-    var chartWidth = margin.left + data.length * barWidth + margin.right;
+    var chartWidth = margin.left + positive.length * barWidth + margin.right;
 
     // This scale produces negative output for negative input 
     var yScale = d3.scaleLinear()
-                   .domain([0, d3.max(data)])
+                   .domain([0, d3.max(positive)])
                    .range([0, chartHeight]);
 
     
      // We need a different scale for drawing the y-axis. It needs
      // a reversed range, and a larger domain to accomodate negaive values.
     var yAxisScale = d3.scaleLinear()
-                       .domain([d3.min(data), d3.max(data)])
-                       .range([chartHeight - yScale(d3.min(data)), 0 ]);
+                       .domain([d3.min(negative), d3.max(positive)])
+                       .range([chartHeight - yScale(d3.min(positive)), 0 ]);
 
     var svg = d3.select('#sentimentTarget').append("svg");
     svg
@@ -77,18 +89,34 @@ function tegnSentimentChart(data) {
         .style('border', '1px solid');
 
     svg
-      .selectAll("rect")
-      .data(data)
+      .selectAll("positiveBars")
+      .data(positive)
       .enter()
       .append("rect")
         .attr("x", function(d, i) { return margin.left + i * barWidth; })
         .attr("y", function(d, i) { return chartHeight - Math.max(0, yScale(d));})
         .attr("height", function(d) { return Math.abs(yScale(d)); })
         .attr("width", barWidth)
+        .attr("class", "positiveBars")
         .style("fill", "grey")
         .style("stroke", "black")
         .style("stroke-width", "1px")
         .style("opacity", function(d, i) { return 1 });
+
+    svg
+        .selectAll("negativeBars")
+        .data(negative)
+        .enter()
+        .append("rect")
+          .attr("x", function(d, i) { return margin.left + i * barWidth; })
+          .attr("y", function(d, i) { return chartHeight - Math.max(0, yScale(d));})
+          .attr("height", function(d) { return Math.abs(yScale(d)); })
+          .attr("width", barWidth)
+          .attr("class", "negativeBars")
+          .style("fill", "grey")
+          .style("stroke", "black")
+          .style("stroke-width", "1px")
+          .style("opacity", function(d, i) { return 1 });        
 
     var yAxis = d3.axisLeft(yAxisScale);
     
