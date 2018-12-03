@@ -35,7 +35,8 @@ function konverterTilNegativeTall(arr) {
     return arr;
 }
 
-function leggTilTweet(linje, vurdering) {
+function leggTilTweet(str, vurdering) {
+    var linje = str.join(' ');
     return {
         "tweet": linje,
         "sentiment": vurdering
@@ -57,7 +58,23 @@ function hentTopLister(tweets) {
 }
 
 function visToplister(negativeTweets, posititiveTweets) {
-
+    var output = "<br><br>";
+    output += "<h4>Positive Tweets:</h4>";
+    for(var i = 0; i < posititiveTweets.length; i++) {
+        output += "<i>" + posititiveTweets[i].tweet;
+        output += "</i><br>";
+        output += "Sentimentscore: " + posititiveTweets[i].sentiment;
+        output += "<hr>";
+    }
+    output += "<br><br>";
+    output += "<h4>Negative Tweets:</h4>";
+    for(var i = 0; i < negativeTweets.length; i++) {
+        output += "<i>" + negativeTweets[i].tweet;
+        output += "</i><br>";
+        output += "Sentimentscore: " + negativeTweets[i].sentiment;
+        output += "<hr>";
+    }
+    $("#sentimentToplisteTarget").html(output);
 }
 
 function tegnSentimentChart(positive, negative) {
@@ -80,7 +97,7 @@ function tegnSentimentChart(positive, negative) {
      // a reversed range, and a larger domain to accomodate negaive values.
     var yAxisScale = d3.scaleLinear()
                        .domain([d3.min(negative), d3.max(positive)])
-                       .range([chartHeight - yScale(d3.min(positive)), 0 ]);
+                       .range([chartHeight - yScale(d3.min(negative)), 0 ]);
 
     var svg = d3.select('#sentimentTarget').append("svg");
     svg
@@ -98,7 +115,7 @@ function tegnSentimentChart(positive, negative) {
         .attr("height", function(d) { return Math.abs(yScale(d)); })
         .attr("width", barWidth)
         .attr("class", "positiveBars")
-        .style("fill", "grey")
+        .style("fill", "steelblue")
         .style("stroke", "black")
         .style("stroke-width", "1px")
         .style("opacity", function(d, i) { return 1 });
@@ -113,7 +130,7 @@ function tegnSentimentChart(positive, negative) {
           .attr("height", function(d) { return Math.abs(yScale(d)); })
           .attr("width", barWidth)
           .attr("class", "negativeBars")
-          .style("fill", "grey")
+          .style("fill", "red")
           .style("stroke", "black")
           .style("stroke-width", "1px")
           .style("opacity", function(d, i) { return 1 });        
