@@ -143,5 +143,17 @@ function tegnSentimentChart(positive, negative) {
       })
       .call(yAxis);
 
+    svg.append("text")
+        .attr("x", (chartWidth/2) - 15)
+        .attr("y", chartHeight + 240)
+        .attr("text-anchor", "middle")
+        .text("Sentiment Score");
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -chartHeight)
+        .attr("y", 15)
+        .attr("text-anchor", "middle")
+        .text("Antall Tweets");        
+
 }
 
