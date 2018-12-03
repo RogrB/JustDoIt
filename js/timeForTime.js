@@ -4,7 +4,7 @@ var timeData = [356, 413, 703, 416, 275, 182, 168, 138, 114, 130, 153, 326, 373,
 
 // 2. Definerer SVG plassering og marginer
 var margin = { top: 50, right: 50, bottom: 50, left: 50 }
-    , width = window.innerWidth - margin.left - margin.right // Use the window's width 
+    , width = window.innerWidth - margin.left - margin.right - 30 // Use the window's width 
     , height = window.innerHeight - margin.top - margin.bottom; // Use the window's height
 
 // Antall timeDatapoints
@@ -28,31 +28,32 @@ var line = d3.line()
     .curve(d3.curveMonotoneX) // apply smoothing to the line
 
 // 1. Add the SVG to the page and employ #2
-var svg = d3.select("#timeForTime").append("svg")
+var infoBoksSVG = d3.select("#timeForTime").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+    .style('border', '1px solid')
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 // 3. Call the x axis in a group tag
-svg.append("g")
+infoBoksSVG.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(xScale)); // Create an axis component with d3.axisBottom
 
 // 4. Call the y axis in a group tag
-svg.append("g")
+infoBoksSVG.append("g")
     .attr("class", "y axis")
     .call(d3.axisLeft(yScale)); // Create an axis component with d3.axisLeft
 
 // 9. Append the path, bind the ata, and call the line generator 
-svg.append("path")
+infoBoksSVG.append("path")
     .datum(timeData) // 10. Binds data to the line 
     .attr("class", "line") // Assign a class for styling 
     .attr("d", line); // 11. Calls the line generator 
 
 // 12. Appends a circle for each Datapoint 
-svg.selectAll(".dot")
+infoBoksSVG.selectAll(".dot")
     .data(timeData)
     .enter().append("circle") // Uses the enter().append() method
     .attr("class", "dot") // Assign a class for styling
@@ -66,7 +67,7 @@ svg.selectAll(".dot")
     .on("mouseout", function () { })
        .on("mousemove", mousemove);
 
-   var focus = svg.append("g")
+   var focus = infoBoksSVG.append("g")
        .attr("class", "focus")
        .style("display", "none");
 
@@ -77,7 +78,7 @@ svg.selectAll(".dot")
        .attr("x", 9)
        .attr("dy", ".35em");
 
-   svg.append("rect")
+   infoBoksSVG.append("rect")
        .attr("class", "overlay")
        .attr("width", width)
        .attr("height", height)

@@ -18,7 +18,8 @@ function viskartData(data) {
     var kartsvg = d3.select("#kart")
     .append("svg")
     .attr("width", 960)
-    .attr("height", 600);
+    .attr("height", 600)
+    .style('border', '1px solid');
     var projection = d3.geoMercator();
 
     var path = d3.geoPath()

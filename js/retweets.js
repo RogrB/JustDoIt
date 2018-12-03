@@ -56,6 +56,7 @@ function tegnRetweetsBarChart(retweets) {
     var svg = d3.select("#retweets").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
+        .style('border', '1px solid')
         .attr("id", "retweetSVG")
         .append("g")
         .attr("transform",

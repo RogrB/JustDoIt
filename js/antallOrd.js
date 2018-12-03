@@ -43,6 +43,7 @@ function tegnAntallOrd(data) {
         .append("svg")
         .attr("width", diameter)
         .attr("height", diameter)
+        .style('border', '1px solid')        
         .attr("id", "antallOrdSVG")
         .attr("class", "bubble");
 

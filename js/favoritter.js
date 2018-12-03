@@ -69,6 +69,7 @@ function tegnFavoritterBarChart(favoritter) {
     var svg = d3.select("#favoritter").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
+        .style('border', '1px solid')
         .attr("id", "favoritterSVG")
         .append("g")
         .attr("transform",
