@@ -43,7 +43,7 @@ function erIFiltreringsListe(ord) {
 function tegnAntallOrd(data) {
     var diameter = 600;
     var color = d3.scaleOrdinal(d3.schemeCategory20);
-
+    
     var bubble = d3.pack(data)
     .size([diameter, diameter])
     .padding(1.5);
@@ -83,7 +83,9 @@ function tegnAntallOrd(data) {
         .style("fill", function (d) {
             //return "blue";
             return "hsl(" + Math.random() * 360 + ",100%,50%)";
-        });
+        })
+        .on("mouseover", function (d) { infoBoks(d, "antallOrd"); })
+        .on("mouseout", function () { fjernInfoBoks(); });
 
     node.append("text")
         .attr("dy", ".3em")
@@ -96,6 +98,8 @@ function tegnAntallOrd(data) {
             }
          })
         .style("text-anchor", "middle")
+        .on("mouseover", function (d) { infoBoks(d, "antallOrd"); })
+        .on("mouseout", function () { fjernInfoBoks(); })
         .text(function (d) {
             return d.data.ord.substring(0, d.r / 3);
         });

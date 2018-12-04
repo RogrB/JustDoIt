@@ -9,11 +9,16 @@ function infoBoks(data, type) {
 function hentSVG(data) {
     if (infoType === "retweet") {
         infoBoksSVG = d3.select("#retweetSVG");
+        visInfoBoks(data);
+    }
+    else if(infoType === "favoritter") {
+        infoBoksSVG = d3.select("#favoritterSVG");
+        visInfoBoks(data);
     }
     else {
-        infoBoksSVG = d3.select("#favoritterSVG");
+        infoBoksSVG = d3.select("#antallOrdSVG");
+        visAntallOrdToolTip(data);
     }
-    visInfoBoks(data);
 }
 
 // Tegner en infoboks med data for en enkelt tweet
@@ -96,3 +101,30 @@ function fjernPrintTweet(type) {
     $("#retweetTarget").html("");
     $("#favoritterTarget").html("");
 }
+
+function visAntallOrdToolTip(data) {
+    infoBoksSVG .append("rect")
+        .attr("x", 05)
+        .attr("y", 05)
+        .attr("width", 125)
+        .attr("height", 75)
+        .attr("fill", d3.rgb(55, 66, 84))
+        .attr("stroke", "#2378ae")
+        .attr("stroke-linecap", "butt")
+        .attr("stroke-width", "3")
+        .attr("class", "infoBoks");
+  
+    infoBoksSVG.append("foreignObject")
+        .attr("y", 10)
+        .attr("x", 10)
+        .attr("width", 115)
+        .attr("height", 65)
+        .attr("text-anchor", "start")
+        .attr("class", "infoBoks")
+        .style("font-size", "18px")
+        .style("font-family", "'Time New Roman', Times, serif")
+        .style("fill", "white")
+        .html('<div class="tweetTekst"><p>' + data.data.ord + "<br>Antall: "
+        + data.data.antall + '</p></div>');
+}
+
