@@ -1,3 +1,5 @@
+timeForTime();
+
 $.ajax({
     type: "GET",
     url: 'data/tweetTekst.txt',
@@ -5,7 +7,7 @@ $.ajax({
     dataType: 'text',
     contentType: "text/plain",
     crossDomain: true,
-    success: function (data) {       
+    success: function (data) {
         tellOrd(data);
         sentiment(data);
     }
