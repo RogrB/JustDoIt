@@ -6,7 +6,7 @@ function tellOrd(str) {
     var antallOrd = [];
 
     for (var i = 0; i < ord.length; i++) {
-        if (ord[i].length > 2) {
+        if (ord[i].length > 2 && !erIFiltreringsListe(ord[i])) {
             ord[i] = ord[i].toLowerCase();
             ordTellerRaw[ord[i]] = (ordTellerRaw[ord[i]] || 0) + 1;
         }
@@ -31,6 +31,15 @@ function tellOrd(str) {
     tegnAntallOrd(output);
 }
 
+// Filtrerer ut uinteressante ord og spesialtegn
+function erIFiltreringsListe(ord) {
+    var filtreringsListe = [
+        "nylinje", "https", ":\/\/", "the", "get", "can", ". #", "are", "@", "#", "! #", "for", "\r\n#", "\r\n@", " \n#", "  #", "and"
+    ]
+    return filtreringsListe.indexOf(ord.toLowerCase()) > -1;
+}
+
+// Tegner bubblechart til SVG
 function tegnAntallOrd(data) {
     var diameter = 600;
     var color = d3.scaleOrdinal(d3.schemeCategory20);
@@ -69,19 +78,26 @@ function tegnAntallOrd(data) {
 
     node.append("circle")
         .attr("r", function (d) {
-            //console.log(d);
             return d.r;
         })
         .style("fill", function (d) {
-            return "blue";
-            //return color(d.facilityId);
+            //return "blue";
+            return "hsl(" + Math.random() * 360 + ",100%,50%)";
         });
 
     node.append("text")
         .attr("dy", ".3em")
+        .attr("font-size", function (d) {
+            if(d.data.antall / 20 > 20) {
+                return 22;
+            }
+            else {
+                return d.data.antall / 20;
+            }
+         })
         .style("text-anchor", "middle")
         .text(function (d) {
-            return d.data.ord.substring(0, d.r / 3) + ": " + d.data.antall;
+            return d.data.ord.substring(0, d.r / 3);
         });
 
 
