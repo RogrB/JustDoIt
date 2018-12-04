@@ -15,9 +15,13 @@ function hentSVG(data) {
         infoBoksSVG = d3.select("#favoritterSVG");
         visInfoBoks(data);
     }
-    else {
+    else if(infoType === "antallOrd") {
         infoBoksSVG = d3.select("#antallOrdSVG");
         visAntallOrdToolTip(data);
+    }
+    else {
+        infoBoksSVG = d3.select("#sentimentSVG");
+        visSentimentToolTip(data);
     }
 }
 
@@ -128,3 +132,28 @@ function visAntallOrdToolTip(data) {
         + data.data.antall + '</p></div>');
 }
 
+function visSentimentToolTip(data) {
+    infoBoksSVG .append("rect")
+        .attr("x", infoBoksSVG.attr("width") - 130)
+        .attr("y", 05)
+        .attr("width", 125)
+        .attr("height", 75)
+        .attr("fill", d3.rgb(55, 66, 84))
+        .attr("stroke", "#2378ae")
+        .attr("stroke-linecap", "butt")
+        .attr("stroke-width", "3")
+        .attr("class", "infoBoks");
+  
+    infoBoksSVG.append("foreignObject")
+        .attr("x", infoBoksSVG.attr("width") - 125)
+        .attr("y", 10)
+        .attr("width", 115)
+        .attr("height", 65)
+        .attr("text-anchor", "start")
+        .attr("class", "infoBoks")
+        .style("font-size", "18px")
+        .style("font-family", "'Time New Roman', Times, serif")
+        .style("fill", "white")
+        .html('<div class="tweetTekst"><p>Antall: ' + data + '</p></div>');
+    
+}

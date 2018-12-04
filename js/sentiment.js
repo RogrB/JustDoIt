@@ -103,6 +103,7 @@ function tegnSentimentChart(positive, negative) {
     svg
         .attr('height', chartHeight + 250)
         .attr('width', chartWidth)
+        .attr("id", "sentimentSVG")
         .style('border', '1px solid');
 
     svg
@@ -118,7 +119,9 @@ function tegnSentimentChart(positive, negative) {
         .style("fill", "steelblue")
         .style("stroke", "black")
         .style("stroke-width", "1px")
-        .style("opacity", function(d, i) { return 1 });
+        .style("opacity", function(d, i) { return 1 })
+        .on("mouseover", function (d) { infoBoks(d, "sentiment"); })
+        .on("mouseout", function () { fjernInfoBoks(); });
 
     svg
         .selectAll("negativeBars")
@@ -133,7 +136,9 @@ function tegnSentimentChart(positive, negative) {
           .style("fill", "red")
           .style("stroke", "black")
           .style("stroke-width", "1px")
-          .style("opacity", function(d, i) { return 1 });        
+          .style("opacity", function(d, i) { return 1 })
+          .on("mouseover", function (d) { infoBoks(d, "sentiment"); })
+          .on("mouseout", function () { fjernInfoBoks(); });        
 
     var yAxis = d3.axisLeft(yAxisScale);
     

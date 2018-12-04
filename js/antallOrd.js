@@ -104,8 +104,6 @@ function tegnAntallOrd(data) {
             return d.data.ord.substring(0, d.r / 3);
         });
 
-
-
     d3.select(self.frameElement)
         .style("height", diameter + "px");
 }
