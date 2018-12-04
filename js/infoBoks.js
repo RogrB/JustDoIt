@@ -133,9 +133,10 @@ function visAntallOrdToolTip(data) {
 }
 
 function visSentimentToolTip(data) {
+
     infoBoksSVG .append("rect")
         .attr("x", infoBoksSVG.attr("width") - 130)
-        .attr("y", 05)
+        .attr("y", 20)
         .attr("width", 125)
         .attr("height", 75)
         .attr("fill", d3.rgb(55, 66, 84))
@@ -146,7 +147,7 @@ function visSentimentToolTip(data) {
   
     infoBoksSVG.append("foreignObject")
         .attr("x", infoBoksSVG.attr("width") - 125)
-        .attr("y", 10)
+        .attr("y", 25)
         .attr("width", 115)
         .attr("height", 65)
         .attr("text-anchor", "start")
@@ -154,6 +155,6 @@ function visSentimentToolTip(data) {
         .style("font-size", "18px")
         .style("font-family", "'Time New Roman', Times, serif")
         .style("fill", "white")
-        .html('<div class="tweetTekst"><p>Antall: ' + data + '</p></div>');
+        .html('<div class="tweetTekst"><p>Antall Tweets: <br>' + Math.abs(data) + '</p></div>');
     
 }

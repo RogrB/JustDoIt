@@ -87,17 +87,22 @@ function tegnSentimentChart(positive, negative) {
     var chartHeight = 350;  // Height of chart, from x-axis (ie. y=0)
     var chartWidth = margin.left + positive.length * barWidth + margin.right;
 
+    
     // This scale produces negative output for negative input 
     var yScale = d3.scaleLinear()
                    .domain([0, d3.max(positive)])
                    .range([0, chartHeight]);
 
-    
+    /*
      // We need a different scale for drawing the y-axis. It needs
      // a reversed range, and a larger domain to accomodate negaive values.
     var yAxisScale = d3.scaleLinear()
                        .domain([d3.min(negative), d3.max(positive)])
                        .range([chartHeight - yScale(d3.min(negative)), 0 ]);
+    */
+   var xAxisScale = d3.scaleLinear()
+        .domain([0, 20])
+        .range([0, 600]);
 
     var svg = d3.select('#sentimentTarget').append("svg");
     svg
@@ -140,25 +145,34 @@ function tegnSentimentChart(positive, negative) {
           .on("mouseover", function (d) { infoBoks(d, "sentiment"); })
           .on("mouseout", function () { fjernInfoBoks(); });        
 
-    var yAxis = d3.axisLeft(yAxisScale);
+    //var yAxis = d3.axisLeft(yAxisScale);
+    var xAsis = d3.axisBottom(xAxisScale);
     
     svg.append('g')
       .attr('transform', function(d) {
         return 'translate(' + margin.left + ', 0)';
       })
-      .call(yAxis);
+      .call(xAsis);
 
     svg.append("text")
         .attr("x", (chartWidth/2) - 15)
-        .attr("y", chartHeight + 240)
+        .attr("y", 30)
         .attr("text-anchor", "middle")
         .text("Sentiment Score");
+
+    
     svg.append("text")
         .attr("transform", "rotate(-90)")
-        .attr("x", -chartHeight)
-        .attr("y", 15)
+        .attr("x", -190)
+        .attr("y", 30)
         .attr("text-anchor", "middle")
-        .text("Antall Tweets");        
+        .text("Positive Tweets");
 
+        svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -430)
+        .attr("y", 30)
+        .attr("text-anchor", "middle")
+        .text("Negative Tweets");        
 }
 
