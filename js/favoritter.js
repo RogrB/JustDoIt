@@ -1,16 +1,4 @@
 // Favoritter - Bar chart
-$.ajax({
-    type: "GET",
-    url: 'data/favoritter.txt',
-    async: true,
-    dataType: 'text',
-    contentType: "text/plain",
-    crossDomain: true,
-    success: function (data) {
-        sorterFavoritter(data);
-    }
-});
-
 
 function sorterFavoritter(str) {
     var favoritter = [];

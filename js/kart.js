@@ -1,18 +1,4 @@
 // Kartdata
-$.ajax({
-    type: "GET",
-    url: 'data/geodata.json',
-    async: true,
-    dataType: 'json',
-    crossDomain: true,
-    success: function (data) {
-        viskartData(data);
-    },
-    error(e, f, i) {
-        console.log("Feil", e, f, i)
-    }
-});
-
 
 function viskartData(data) {
     var kartsvg = d3.select("#kart")

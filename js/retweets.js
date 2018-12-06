@@ -1,15 +1,4 @@
 // Retweets - Bar chart
-$.ajax({
-    type: "GET",
-    url: 'data/retweeted.txt',
-    async: true,
-    dataType: 'text',
-    contentType: "text/plain",
-    crossDomain: true,
-    success: function (data) {
-        sorterRetweets(data);
-    }
-});
 
 function sorterRetweets(str) {
     var retweets = [];
