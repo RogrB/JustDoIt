@@ -1,10 +1,20 @@
 ﻿body {
     font-family: 'Open Sans', sans-serif;
 }
+* {
+    margin: 0;
+    padding: 0;
+}
+.streamgraphDiv {
+    display: grid;
+    height: 100%;
+}
+.center-fit {
+    max-width: 100%;
+    max-height: 100vh;
+    margin: auto;
+}
 
-/* 13. Basic Styling with CSS */
-
-/* Style the lines by removing the fill and applying a stroke */
 .line {
     fill: none;
     stroke: #ffab00;
@@ -16,7 +26,6 @@
     pointer-events: all;
 }
 
-/* Style the dots by assigning a fill and stroke */
 .dot {
     fill: #ffab00;
     stroke: #fff;
