@@ -1,7 +1,8 @@
 // Kartdata
 
 function viskartData(data) {
-    var kartsvg = d3.select("#kart")
+
+    var svg = d3.select("#kart")
     .append("svg")
     .attr("width", 960)
     .attr("height", 600)
@@ -11,11 +12,11 @@ function viskartData(data) {
     var path = d3.geoPath()
     .projection(projection)
 
-    var url = "http://enjalot.github.io/wwsd/data/world/world-110m.geojson";
+    var url = "js/bibliotek/world-110m.geojson";
     d3.json(url, function(error, countries) {
         if (error) console.log(error);
     
-        kartsvg.selectAll("path")
+        svg.selectAll("path")
             .data(countries.features)
             .enter().append("path")
             .attr("d", path)
@@ -28,7 +29,7 @@ function viskartData(data) {
                 .classed("active",false)
             });
         
-        kartsvg.selectAll("circle")
+        svg.selectAll("circle")
             .data(data.items)
             .enter().append("circle")
             .attr('r',5)

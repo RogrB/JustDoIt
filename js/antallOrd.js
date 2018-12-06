@@ -41,6 +41,7 @@ function erIFiltreringsListe(ord) {
 
 // Tegner bubblechart til SVG
 function tegnAntallOrd(data) {
+            
     var diameter = 600;
     var color = d3.scaleOrdinal(d3.schemeCategory20);
     
