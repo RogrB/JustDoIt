@@ -92,7 +92,7 @@ function fjernInfoBoks() {
 
 function printTweet(d, type) {
     infoType = type;
-    var output = "";
+    var output = "<hr>";
     output += "<p>" + d.antall + " retweets</p>";
     output += "<p>" + d.tweet + "</p>";
     output += "<p>Skrevet av: " + d.forfatter + "</p>";

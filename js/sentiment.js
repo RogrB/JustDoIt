@@ -58,7 +58,7 @@ function hentTopLister(tweets) {
 }
 
 function visToplister(negativeTweets, posititiveTweets) {
-    var output = "<br><br>";
+    var output = "";
     output += "<h4>Positive Tweets:</h4>";
     for(var i = 0; i < posititiveTweets.length; i++) {
         output += "<i>" + posititiveTweets[i].tweet;

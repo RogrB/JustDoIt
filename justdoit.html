@@ -72,40 +72,88 @@
     <br><br>
 
     <h1 id="geomapLink">GeoMap</h1>
-    <p></p>
+    <p>Den neste visualiseringen er et verdenskart som viser hvor hver tweet som inneholdt geo-data ble skrevet fra</p>
     <div class="centerDiv">
         <div id="kart"></div>
+        <p class="sentrerTekst"><i>Verdenskart med markering over hvor tweetene ble skrevet</i></p>
     </div>
     <br>
 
     <h1 id="antallOrdLink">Antall Ord</h1>
+    <p>Den neste visualiseringen viser oversikt over hvilke ord som ble brukt mest og hvor 
+        ofte de forekom i det totale datasettet. Størrelsen på boblene angir hvor ofte ordet har blitt brukt</p>
     <div class="centerDiv">
         <div id="antallOrd"></div>
+        <p class="sentrerTekst"><i>Visualisering av antall ord</i></p>
     </div>
+
+    <br>
 
     <h1 id="favoritterLink">Antall Favoritter</h1>
+    <p>Den neste visualiseringen viser de 50 mest likte tweetene - de tweetene som har blitt trykket "favourite"
+        på flest ganger. Innholdet i tweeten vises ved å bevege musepekeren over grafen. Ved å trykke på grafen blir Innholdet
+        i tweeten vist i et element under visualiseringen.
+    </p>
     <div class="centerDiv">
         <div id="favoritter"></div>
+        <p class="sentrerTekst"><i>Visualisering av de 50 mest likte tweetene. Y-aksen viser brukernavnet til forfatteren,
+            mens X-aksen viser antall "likes" (favourites) tweeten har fått.</i>
+        </p>
     </div>
 
     <div class="centerDiv">
+        <p></p>
         <div id="favoritterTarget"></div>
     </div>
 
+    <br>
+
     <h1 id="retweetsLink">Antall Retweets</h1>
+    <p>Den neste visualiseringen viser de 50 tweetene som har blitt retweeted flest ganger.
+        Innholdet i tweeten vises ved å bevege musepekeren over grafen. Ved å trykke på grafen blir Innholdet
+        i tweeten vist i et element under visualiseringen.
+    </p>
     <div class="centerDiv">
         <div id="retweets"></div>
+        <p class="sentrerTekst"><i>Visualisering av tweetene som har blitt retweeted flest ganger.
+             Y-aksen viser brukernavnet til forfatteren, mens X-aksen viser antall retweets.</i>
+            </p>
     </div>
 
     <div class="centerDiv">
         <div id="retweetTarget"></div>
     </div>
 
+    <br>
+
     <h1 id="sentimentLink">Sentiment Analyse</h1>
+    <p>
+        Sentimentanalyse er en måte å vurdere meninger uttrykt i 
+        en spesifikk tekst, eksempelvis om teksten er uttrykt på en positiv eller negativ måte. 
+        <br>
+        Denne sentimentanalysen er utført ved bruk av 
+        <a href="http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010">AFINN ordbibliotek</a>,
+        hvor hvert ord i twittermeldingen har blitt sammenlignet med ordene i ordbiblioteket for å gi tweeten en totalscore.
+        <br>
+        Denne poengsummen avgjør så om en tweet blir vurdert til å være positiv, nøytral eller negativ.
+        <br><br>
+        Analysen har her blitt  utført på alle tweetene i datasettet, og visualiseringen under viser antall 
+        positive og negative tweets fordelt på poengsummen de fikk. Høyere poengsum betyr en mer definitivt positiv 
+        eller negativ tweet. Antall tweets kan vises ved å bevege musepekeren over grafen.
+    </p>
     <div class="centerDiv">
         <div id="sentimentTarget"></div>
+        <p class="sentrerTekst"><i>Visualisering av sentimentanalysen. Høyere score viser mer positive 
+            eller negative tweets.</i></p>
     </div>
+    <br>
 
+    <h1>Sentiment Topliste</h1>
+    <p>Under vises de 5 høyeste vurderte positive og negative tweetene. Dette blir ikke presentert som en visualisering, 
+        og inkluderes kun som en bonus for å vise effekten av sentimentanalyse og gi en viss innsikt i innholdet i de
+        tweetene som ble høyest vurdert.
+    </p>
+    <br>
     <div id="sentimentToplisteTarget"></div>
 
     <script type="text/javascript" src="js/infoBoks.js"></script>

@@ -55,7 +55,8 @@ function tegnLineChart(timeData) {
         .attr("class", "dot")
         .attr("cx", function (d, i) { return xScale(i) })
         .attr("cy", function (d) { return yScale(d) })
-        .attr("r", 5)
+        .attr("r", 10)
+        .style("stroke", "black")
         .on("mouseover", function (d) {
             infoBoks(d, "timeForTime");
         })
@@ -66,7 +67,7 @@ function tegnLineChart(timeData) {
         .style("display", "none");
 
     focus.append("circle")
-        .attr("r", 4.5);
+        .attr("r", 10);
 
     focus.append("text")
         .attr("x", 9)
