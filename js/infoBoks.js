@@ -19,8 +19,12 @@ function hentSVG(data) {
         infoBoksSVG = d3.select("#antallOrdSVG");
         visAntallOrdToolTip(data);
     }
-    else {
+    else if(infoType === "sentiment") {
         infoBoksSVG = d3.select("#sentimentSVG");
+        visSentimentToolTip(data);
+    }
+    else {
+        infoBoksSVG = d3.select("#timeForTimeSVG");
         visSentimentToolTip(data);
     }
 }
