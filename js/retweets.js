@@ -27,9 +27,9 @@ function sorterRetweets(str) {
 
 function tegnRetweetsBarChart(retweets) {
     // set the dimensions and margins of the graph
-    var margin = { top: 20, right: 20, bottom: 30, left: 40 },
-        width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+    var margin = { top: 50, right: 50, bottom: 50, left: 50 }
+        , width = window.innerWidth - margin.left - margin.right - 100
+        , height = window.innerHeight - margin.top - margin.bottom;
 
     // set the ranges
     var y = d3.scaleBand()

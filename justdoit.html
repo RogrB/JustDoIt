@@ -4,42 +4,110 @@
 <head>
     <meta charset="utf-8" />
     <title>#justdoit - Et visualiseringsprosjekt</title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-grid.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/justdoit.css" />
+    
     <script type="text/javascript" src="js/bibliotek/jquery-3.2.0.js"></script>
     <script type="text/javascript" src="js/bibliotek/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/bibliotek/d3.js"></script>
     <script type="text/javascript" src="js/bibliotek/topojson.js"></script>
-    
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
-    <link type="text/css" rel="stylesheet" href="css/bootstrap-grid.min.css" />
-    <link type="text/css" rel="stylesheet" href="css/justdoit.css" />
 
 </head>
 <body>
-    #justdoit
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <ul class="nav navbar-nav">
+            <li><a href="#timeForTimeLink">Time-For-Time</a></li>
+            <li><a href="#geomapLink">GeoMap</a></li>
+            <li><a href="#antallOrdLink">Antall Ord</a></li>
+            <li><a href="#favoritterLink">Antall Favoritter</a></li>
+            <li><a href="#retweetsLink">Antall Retweets</a></li>
+            <li><a href="#sentimentLink">Sentiment Analyse</a></li>
+          </ul>
+        </div>
+      </nav>
+    <h1>#justdoit</h1>
+    <p>En visualiseringsoppgave ved OsloMet</p>
+    <hr>
+    <br><br>
+    <p>Torsdag 6. September 2018 publiserte sportsvaregiganten Nike en reklamekampanje med en ny frontfigur: 
+        NFL spilleren Colin Kaepernick. Denne reklamekampanjen kom i kjølvannet av en lang og kontroversiell
+        protest hvor konfliktens kjerne omhandler politivold. Kaepernick hadde i lengre tid utført stille 
+        protester ved å stå på ett kne under spillingen av nasjonalsangen før kamper, noe som har skapt reaksjoner
+        hos enkelte deler av publikum.</p>
 
-    <div class="centerDiv">
-        <div id="timeForTime"></div>
+    <p>Denne reklamekampanjen utløste en rekke reaksjoner både for og imot, hvor enkelte motstandere la ut bilder og
+        video av at de klippet og satt fyr på Nike produkter.
+    </p>
+
+    <div class="streamgraphDiv">
+        <img src="images/justdoit.jpg" alt="Bilde fra reklamekampanjen" class="center-fit">
+        <p class="sentrerTekst"><i>Et bilde fra reklamekampanjen - Oppravsrett: Nike</i></p>
     </div>
 
+    <p>I denne oppgaven tar jeg for meg et datasett som inneholder over 5 000 tweets under taggen #justdoit som ble
+        skrevet den 7. September 2018. Dataene presenteres som de er, og jeg påtar meg ikke noe ansvar for
+        innhold i noen av twittermeldingene.
+    </p>
+    
+    <br>
+    <h1 id="timeForTimeLink">Time-For-Time</h1>
+    <p>Den første visualiseringen tar for seg antall tweets som ble skrevet hver time i løpet av dette døgnet
+        (Merk: Datasettet inneholdt kun tweets fra klokken 0 til 17)
+    </p>
+    <div class="centerDiv">
+        <div id="timeForTime"></div>
+        <p class="sentrerTekst"><i>Visualisering av antall tweets per time.
+            X-aksen viser time i døgnet, mens Y-aksen viser antall tweets.</i>
+        </p>
+    </div>
+
+    <br><br>
+    <p>Som et tillegg til den forrige visualiseringen inkluderes her en StreamGraph som viser de samme dataene: Time-For-Time</p>
     <div class="streamgraphDiv">
         <img src="images/streamgraph.jpg" alt="Stream Graph" class="center-fit">
     </div>
 
+    <br><br>
+
+    <h1 id="geomapLink">GeoMap</h1>
+    <p></p>
     <div class="centerDiv">
         <div id="kart"></div>
     </div>
     <br>
 
+    <h1 id="antallOrdLink">Antall Ord</h1>
     <div class="centerDiv">
         <div id="antallOrd"></div>
     </div>
-    
-    <div id="favoritter"></div>
-    <div id="favoritterTarget"></div>
-    <div id="retweets"></div>
-    <div id="retweetTarget"></div>
-    <div id="sentimentTarget"></div>
+
+    <h1 id="favoritterLink">Antall Favoritter</h1>
+    <div class="centerDiv">
+        <div id="favoritter"></div>
+    </div>
+
+    <div class="centerDiv">
+        <div id="favoritterTarget"></div>
+    </div>
+
+    <h1 id="retweetsLink">Antall Retweets</h1>
+    <div class="centerDiv">
+        <div id="retweets"></div>
+    </div>
+
+    <div class="centerDiv">
+        <div id="retweetTarget"></div>
+    </div>
+
+    <h1 id="sentimentLink">Sentiment Analyse</h1>
+    <div class="centerDiv">
+        <div id="sentimentTarget"></div>
+    </div>
+
     <div id="sentimentToplisteTarget"></div>
+
     <script type="text/javascript" src="js/infoBoks.js"></script>
     <script type="text/javascript" src="js/timeForTime.js"></script>
     <script type="text/javascript" src="js/kart.js"></script>
