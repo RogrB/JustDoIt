@@ -59,43 +59,38 @@ function hentTopLister(tweets) {
 
 function visToplister(negativeTweets, posititiveTweets) {
     var output = "";
-    output += "<h4>Positive Tweets:</h4>";
+    output += "<h4 style='color: #ffffff'>Positive Tweets:</h4>";
     for(var i = 0; i < posititiveTweets.length; i++) {
         output += "<i>" + posititiveTweets[i].tweet;
         output += "</i><br>";
-        output += "Sentimentscore: " + posititiveTweets[i].sentiment;
-        output += "<hr>";
+        output += "Sentimentscore: <i><span class='gulTekst'>" + posititiveTweets[i].sentiment;
+        output += "</span></i><hr>";
     }
     output += "<br><br>";
-    output += "<h4>Negative Tweets:</h4>";
+    output += "<h4 style='color: #ffffff'>Negative Tweets:</h4>";
     for(var i = 0; i < negativeTweets.length; i++) {
         output += "<i>" + negativeTweets[i].tweet;
         output += "</i><br>";
-        output += "Sentimentscore: " + negativeTweets[i].sentiment;
-        output += "<hr>";
+        output += "Sentimentscore: <i><span class='gulTekst'>" + negativeTweets[i].sentiment;
+        output += "</span></i><hr>";
     }
     $("#sentimentToplisteTarget").html(output);
 }
 
 function tegnSentimentChart(positive, negative) {
-    //var data = [100, -100, -150, 55, 150, 120, 450, 980, 1200];
 
-    var leftMargin = 50;  // Space to the left of first bar; accomodates y-axis labels
-    var rightMargin = 10; // Space to the right of last bar
+    var leftMargin = 50;
+    var rightMargin = 10;
     var margin = {left: leftMargin, right: rightMargin, top: 10, bottom: 10};
-    var barWidth = 30;  // Width of the bars
-    var chartHeight = 350;  // Height of chart, from x-axis (ie. y=0)
+    var barWidth = 30;
+    var chartHeight = 350;
     var chartWidth = margin.left + positive.length * barWidth + margin.right;
 
-    
-    // This scale produces negative output for negative input 
     var yScale = d3.scaleLinear()
                    .domain([0, d3.max(positive)])
                    .range([0, chartHeight]);
 
     /*
-     // We need a different scale for drawing the y-axis. It needs
-     // a reversed range, and a larger domain to accomodate negaive values.
     var yAxisScale = d3.scaleLinear()
                        .domain([d3.min(negative), d3.max(positive)])
                        .range([chartHeight - yScale(d3.min(negative)), 0 ]);

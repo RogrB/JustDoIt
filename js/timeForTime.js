@@ -8,7 +8,7 @@ function timeForTime() {
 function tegnLineChart(timeData) {
 
     var margin = { top: 50, right: 50, bottom: 50, left: 50 }
-        , width = window.innerWidth - margin.left - margin.right - 30 // Bruker vinduets bredde 
+        , width = window.innerWidth - margin.left - margin.right - 225 // Bruker vinduets bredde 
         , height = window.innerHeight - margin.top - margin.bottom; // Bruker vinduets høyde
 
     var n = timeData.length;

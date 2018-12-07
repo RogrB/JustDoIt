@@ -37,7 +37,7 @@ function fjernTags(str) {
 function tegnFavoritterBarChart(favoritter) {
     
     var margin = { top: 50, right: 50, bottom: 50, left: 50 }
-        , width = window.innerWidth - margin.left - margin.right - 100
+        , width = window.innerWidth - margin.left - margin.right - 225
         , height = window.innerHeight - margin.top - margin.bottom;
 
     var y = d3.scaleBand()

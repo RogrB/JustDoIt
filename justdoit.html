@@ -27,145 +27,158 @@
           </ul>
         </div>
       </nav>
-    <h1>#justdoit</h1>
-    <p>En visualiseringsoppgave ved OsloMet</p>
-    <hr>
-    <br><br>
-    <p>Torsdag 6. September 2018 publiserte sportsvaregiganten Nike en reklamekampanje med en ny frontfigur: 
-        NFL spilleren Colin Kaepernick. Denne reklamekampanjen kom i kjølvannet av en lang og kontroversiell
-        protest hvor konfliktens kjerne omhandler politivold. Kaepernick hadde i lengre tid utført stille 
-        protester ved å stå på ett kne under spillingen av nasjonalsangen før kamper, noe som har skapt reaksjoner
-        hos enkelte deler av publikum.</p>
+    <div class="bodyContent">
 
-    <p>Denne reklamekampanjen utløste en rekke reaksjoner både for og imot, hvor enkelte motstandere la ut bilder og
-        video av at de klippet og satt fyr på Nike produkter.
-    </p>
-
-    <div class="streamgraphDiv">
-        <img src="images/justdoit.jpg" alt="Bilde fra reklamekampanjen" class="center-fit">
-        <p class="sentrerTekst"><i>Et bilde fra reklamekampanjen - Oppravsrett: Nike</i></p>
-    </div>
-
-    <p>I denne oppgaven tar jeg for meg et datasett som inneholder over 5 000 tweets under taggen #justdoit som ble
-        skrevet den 7. September 2018. Dataene presenteres som de er, og jeg påtar meg ikke noe ansvar for
-        innhold i noen av twittermeldingene.
-    </p>
-    
-    <br>
-    <h1 id="timeForTimeLink">Time-For-Time</h1>
-    <p>Den første visualiseringen tar for seg antall tweets som ble skrevet hver time i løpet av dette døgnet
-        (Merk: Datasettet inneholdt kun tweets fra klokken 0 til 17)
-    </p>
-    <div class="centerDiv">
-        <div id="timeForTime"></div>
-        <p class="sentrerTekst"><i>Visualisering av antall tweets per time.
-            X-aksen viser time i døgnet, mens Y-aksen viser antall tweets.</i>
-        </p>
-    </div>
-
-    <br><br>
-    <p>Som et tillegg til den forrige visualiseringen inkluderes her en StreamGraph som viser de samme dataene: Time-For-Time</p>
-    <div class="streamgraphDiv">
-        <img src="images/streamgraph.jpg" alt="Stream Graph" class="center-fit">
-    </div>
-
-    <br><br>
-
-    <h1 id="geomapLink">GeoMap</h1>
-    <p>Den neste visualiseringen er et verdenskart som viser hvor hver tweet som inneholdt geo-data ble skrevet fra</p>
-    <div class="centerDiv">
-        <div id="kart"></div>
-        <p class="sentrerTekst"><i>Verdenskart med markering over hvor tweetene ble skrevet</i></p>
-    </div>
-    <br>
-
-    <h1 id="antallOrdLink">Antall Ord</h1>
-    <p>Den neste visualiseringen viser oversikt over hvilke ord som ble brukt mest og hvor 
-        ofte de forekom i det totale datasettet. Størrelsen på boblene angir hvor ofte ordet har blitt brukt</p>
-    <div class="centerDiv">
-        <div id="antallOrd"></div>
-        <p class="sentrerTekst"><i>Visualisering av antall ord</i></p>
-    </div>
-
-    <br>
-
-    <h1 id="favoritterLink">Antall Favoritter</h1>
-    <p>Den neste visualiseringen viser de 50 mest likte tweetene - de tweetene som har blitt trykket "favourite"
-        på flest ganger. Innholdet i tweeten vises ved å bevege musepekeren over grafen. Ved å trykke på grafen blir Innholdet
-        i tweeten vist i et element under visualiseringen.
-    </p>
-    <div class="centerDiv">
-        <div id="favoritter"></div>
-        <p class="sentrerTekst"><i>Visualisering av de 50 mest likte tweetene. Y-aksen viser brukernavnet til forfatteren,
-            mens X-aksen viser antall "likes" (favourites) tweeten har fått.</i>
-        </p>
-    </div>
-
-    <div class="centerDiv">
-        <p></p>
-        <div id="favoritterTarget"></div>
-    </div>
-
-    <br>
-
-    <h1 id="retweetsLink">Antall Retweets</h1>
-    <p>Den neste visualiseringen viser de 50 tweetene som har blitt retweeted flest ganger.
-        Innholdet i tweeten vises ved å bevege musepekeren over grafen. Ved å trykke på grafen blir Innholdet
-        i tweeten vist i et element under visualiseringen.
-    </p>
-    <div class="centerDiv">
-        <div id="retweets"></div>
-        <p class="sentrerTekst"><i>Visualisering av tweetene som har blitt retweeted flest ganger.
-             Y-aksen viser brukernavnet til forfatteren, mens X-aksen viser antall retweets.</i>
-            </p>
-    </div>
-
-    <div class="centerDiv">
-        <div id="retweetTarget"></div>
-    </div>
-
-    <br>
-
-    <h1 id="sentimentLink">Sentiment Analyse</h1>
-    <p>
-        Sentimentanalyse er en måte å vurdere meninger uttrykt i 
-        en spesifikk tekst, eksempelvis om teksten er uttrykt på en positiv eller negativ måte. 
-        <br>
-        Denne sentimentanalysen er utført ved bruk av 
-        <a href="http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010">AFINN ordbibliotek</a>,
-        hvor hvert ord i twittermeldingen har blitt sammenlignet med ordene i ordbiblioteket for å gi tweeten en totalscore.
-        <br>
-        Denne poengsummen avgjør så om en tweet blir vurdert til å være positiv, nøytral eller negativ.
+        <h1 class="gulTekst">#justdoit</h1>
+        <p>En visualiseringsoppgave ved OsloMet av Roger Birkenes Solli - s315735</p>
+        <p>Antall rader i datasettet: <i><span class="gulTekst">5089</span></i></p>
+        <hr>
         <br><br>
-        Analysen har her blitt  utført på alle tweetene i datasettet, og visualiseringen under viser antall 
-        positive og negative tweets fordelt på poengsummen de fikk. Høyere poengsum betyr en mer definitivt positiv 
-        eller negativ tweet. Antall tweets kan vises ved å bevege musepekeren over grafen.
-    </p>
-    <div class="centerDiv">
-        <div id="sentimentTarget"></div>
-        <p class="sentrerTekst"><i>Visualisering av sentimentanalysen. Høyere score viser mer positive 
-            eller negative tweets.</i></p>
+        <p>Torsdag 6. September 2018 publiserte sportsvaregiganten Nike en reklamekampanje med en ny frontfigur: 
+            NFL spilleren Colin Kaepernick. Denne reklamekampanjen kom i kjølvannet av en lang og kontroversiell
+            protest hvor konfliktens kjerne omhandler politivold. Kaepernick hadde i lengre tid utført stille 
+            protester ved å stå på ett kne under spillingen av nasjonalsangen før kamper, noe som har skapt reaksjoner
+            hos enkelte deler av publikum.</p>
+
+        <p>Denne reklamekampanjen utløste en rekke reaksjoner både for og imot, hvor enkelte motstandere la ut bilder og
+            videoer på sosiale medier av at de klippet og satt fyr på Nike produkter.
+        </p>
+
+        <div class="streamgraphDiv">
+            <img src="images/justdoit.jpg" alt="Bilde fra reklamekampanjen" class="center-fit">
+            <p class="sentrerTekst gulTekst"><i>Et bilde fra reklamekampanjen - Oppravsrett: Nike</i></p>
+        </div>
+        <br>
+
+        <p>I denne oppgaven tar jeg for meg et datasett som inneholder over 5 000 tweets under taggen #justdoit som ble
+            skrevet den 7. September 2018. Dataene presenteres som de er, og jeg påtar meg ikke noe ansvar for
+            innhold i noen av twittermeldingene.
+        </p>
+        
+        <br>
+        <h1 id="timeForTimeLink">Time-For-Time</h1>
+        <p>Den første visualiseringen tar for seg antall tweets som ble skrevet hver time i løpet av dette døgnet
+            (Merk: Datasettet inneholdt kun tweets fra klokken 0 til 17)
+        </p>
+        <div class="centerDiv">
+            <div id="timeForTime" class="visualiseringer"></div>
+            <p class="sentrerTekst gulTekst"><i>Visualisering av antall tweets per time.
+                X-aksen viser time i døgnet, mens Y-aksen viser antall tweets.</i>
+            </p>
+        </div>
+
+        <br><br>
+        <p>Som et tillegg til den forrige visualiseringen inkluderes her en StreamGraph som viser de samme dataene: Time-For-Time</p>
+        <div class="streamgraphDiv">
+            <img src="images/streamgraph.jpg" alt="Stream Graph" class="center-fit">
+        </div>
+
+        <br><br>
+
+        <h1 id="geomapLink">GeoMap</h1>
+        <p>Antall tweets som inneholdt geodata: <i><span class="gulTekst">128</span></i></p>
+        <p>Den neste visualiseringen er et verdenskart som viser hvor hver tweet som inneholdt geodata ble skrevet fra</p>
+        <div class="centerDiv">
+            <div id="kart" class="visualiseringer"></div>
+            <p class="sentrerTekst gulTekst"><i>Verdenskart med markering over hvor tweetene ble skrevet</i></p>
+        </div>
+        <br>
+
+        <h1 id="antallOrdLink">Antall Ord</h1>
+        <p>Total antall ord: <i><span class="gulTekst">80697</span></i></p>
+        <p>Den neste visualiseringen viser oversikt over hvilke ord som ble brukt mest og hvor 
+            ofte de forekom i det totale datasettet. Størrelsen på boblene angir hvor ofte ordet har blitt brukt</p>
+        <div class="centerDiv">
+            <div id="antallOrd" class="visualiseringer"></div>
+            <p class="sentrerTekst gulTekst"><i>Visualisering av antall ord</i></p>
+        </div>
+
+        <br>
+
+        <h1 id="favoritterLink">Antall Favoritter</h1>
+        <p>Antall tweets som har blitt "favourited": <i><span class="gulTekst">1802</span></i></p>
+        <p>Den neste visualiseringen viser de 50 mest likte tweetene - de tweetene som har blitt trykket "favourite"
+            på flest ganger. Innholdet i tweeten vises ved å bevege musepekeren over grafen. Ved å trykke på grafen blir Innholdet
+            i tweeten vist i et element under visualiseringen.
+        </p>
+        <div class="centerDiv">
+            <div id="favoritter" class="visualiseringer"></div>
+            <p class="sentrerTekst gulTekst"><i>Visualisering av de 50 mest likte tweetene. Y-aksen viser brukernavnet til forfatteren,
+                mens X-aksen viser antall "likes" (favourites) tweeten har fått.</i>
+            </p>
+        </div>
+
+        <div class="centerDiv">
+            <p></p>
+            <div id="favoritterTarget"></div>
+        </div>
+
+        <br>
+
+        <h1 id="retweetsLink">Antall Retweets</h1>
+        <p>Antall tweets som har blitt retweeted: <i><span class="gulTekst">759</span></i></p>
+        <p>Den neste visualiseringen viser de 50 tweetene som har blitt retweeted flest ganger.
+            Innholdet i tweeten vises ved å bevege musepekeren over grafen. Ved å trykke på grafen blir Innholdet
+            i tweeten vist i et element under visualiseringen.
+        </p>
+        <div class="centerDiv">
+            <div id="retweets" class="visualiseringer"></div>
+            <p class="sentrerTekst gulTekst"><i>Visualisering av tweetene som har blitt retweeted flest ganger.
+                Y-aksen viser brukernavnet til forfatteren, mens X-aksen viser antall retweets.</i>
+                </p>
+        </div>
+
+        <div class="centerDiv">
+            <div id="retweetTarget"></div>
+        </div>
+
+        <br>
+
+        <h1 id="sentimentLink">Sentiment Analyse</h1>
+        <p><i><span class="gulTekst">5089</span></i> tweets har blitt analysert, med
+             <i><span class="gulTekst">80697</span></i> ord totalt</p>
+        <p>
+            Sentimentanalyse er en måte å vurdere meninger uttrykt i 
+            en spesifikk tekst, eksempelvis om teksten er uttrykt på en positiv eller negativ måte. 
+            <br>
+            Denne sentimentanalysen er utført ved bruk av 
+            <a href="http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010">AFINN ordbibliotek</a>,
+            hvor hvert ord i twittermeldingen har blitt sammenlignet med ordene i ordbiblioteket for å gi tweeten en totalscore.
+            <br>
+            Denne poengsummen avgjør så om en tweet blir vurdert til å være positiv, nøytral eller negativ.
+            <br><br>
+            Analysen har her blitt  utført på alle tweetene i datasettet, og visualiseringen under viser antall 
+            positive og negative tweets fordelt på poengsummen de fikk. Høyere poengsum betyr en mer definitivt positiv 
+            eller negativ tweet. Antall tweets kan vises ved å bevege musepekeren over grafen.
+        </p>
+        <div class="centerDiv">
+            <div id="sentimentTarget" class="visualiseringer"></div>
+            <p class="sentrerTekst gulTekst"><i>Visualisering av sentimentanalysen. Høyere score viser mer positive 
+                eller negative tweets.</i></p>
+        </div>
+        <br>
+
+        <h1>Sentiment Topliste</h1>
+        <p>Under vises de 5 høyeste vurderte positive og negative tweetene. Dette blir ikke presentert som en visualisering, 
+            og inkluderes kun som en bonus for å vise effekten av sentimentanalyse og gi en viss innsikt i innholdet i de
+            tweetene som ble høyest vurdert.
+        </p>
+        <br>
+        <div id="sentimentToplisteTarget"></div>
+
+        <script type="text/javascript" src="js/infoBoks.js"></script>
+        <script type="text/javascript" src="js/timeForTime.js"></script>
+        <script type="text/javascript" src="js/kart.js"></script>
+        <script type="text/javascript" src="js/antallOrd.js"></script>
+        <script type="text/javascript" src="js/favoritter.js"></script>
+        <script type="text/javascript" src="js/retweets.js"></script>
+        <script type="text/javascript" src="js/bibliotek/afinn_en.js"></script>
+        <script type="text/javascript" src="js/bibliotek/afinn_emoticon.js"></script>
+        <script type="text/javascript" src="js/sentiment.js"></script>
+        <script type="text/javascript" src="js/master.js"></script>
+        <br><br><br><br>
+
     </div>
-    <br>
 
-    <h1>Sentiment Topliste</h1>
-    <p>Under vises de 5 høyeste vurderte positive og negative tweetene. Dette blir ikke presentert som en visualisering, 
-        og inkluderes kun som en bonus for å vise effekten av sentimentanalyse og gi en viss innsikt i innholdet i de
-        tweetene som ble høyest vurdert.
-    </p>
-    <br>
-    <div id="sentimentToplisteTarget"></div>
-
-    <script type="text/javascript" src="js/infoBoks.js"></script>
-    <script type="text/javascript" src="js/timeForTime.js"></script>
-    <script type="text/javascript" src="js/kart.js"></script>
-    <script type="text/javascript" src="js/antallOrd.js"></script>
-    <script type="text/javascript" src="js/favoritter.js"></script>
-    <script type="text/javascript" src="js/retweets.js"></script>
-    <script type="text/javascript" src="js/bibliotek/afinn_en.js"></script>
-    <script type="text/javascript" src="js/bibliotek/afinn_emoticon.js"></script>
-    <script type="text/javascript" src="js/sentiment.js"></script>
-    <script type="text/javascript" src="js/master.js"></script>
-    <br><br><br><br>
 </body>
 </html>

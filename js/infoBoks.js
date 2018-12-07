@@ -93,9 +93,15 @@ function fjernInfoBoks() {
 function printTweet(d, type) {
     infoType = type;
     var output = "<hr>";
-    output += "<p>" + d.antall + " retweets</p>";
-    output += "<p>" + d.tweet + "</p>";
-    output += "<p>Skrevet av: " + d.forfatter + "</p>";
+    output += "<p><i><span class='gulTekst'>" + d.antall + "</span></i>";
+    if(infoType === "retweet") {
+        output += " retweets";
+    }
+    else {
+        output += " favoritter";
+    }
+    output += "</p><p style='color: #ffffff;'>" + d.tweet + "</p>";
+    output += "<p>Skrevet av: <i><span class='gulTekst'>" + d.forfatter + "</span></i></p>";
     output += "<button onclick='fjernPrintTweet()' class='btn btn-info'>Fjern</button>";
     if(type === "retweet") {
         $("#retweetTarget").html(output);
