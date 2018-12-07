@@ -26,12 +26,12 @@ function sorterRetweets(str) {
 }
 
 function tegnRetweetsBarChart(retweets) {
-    // set the dimensions and margins of the graph
+    
     var margin = { top: 50, right: 50, bottom: 50, left: 50 }
         , width = window.innerWidth - margin.left - margin.right - 225
         , height = window.innerHeight - margin.top - margin.bottom;
 
-    // set the ranges
+    
     var y = d3.scaleBand()
         .range([height, 0])
         .padding(0.1);
@@ -39,9 +39,6 @@ function tegnRetweetsBarChart(retweets) {
     var x = d3.scaleLinear()
         .range([0, width]);
 
-    // append the svg object to the body of the page
-    // append a 'group' element to 'svg'
-    // moves the 'group' element to the top left margin
     var svg = d3.select("#retweets").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -52,11 +49,9 @@ function tegnRetweetsBarChart(retweets) {
             "translate(" + margin.left + "," + margin.top + ")");
 
 
-    // Scale the range of the data in the domains
     x.domain([0, d3.max(retweets, function (d) { return d.antall; })]);
     y.domain(retweets.map(function (d) { return d.forfatter; }));
 
-    // append the rectangles for the bar chart
     svg.selectAll(".bar")
         .data(retweets)
         .enter().append("rect")
@@ -69,24 +64,19 @@ function tegnRetweetsBarChart(retweets) {
         .on("click", function (d) { printTweet(d, "retweet"); })
         .on("touchstart", function (d) { printTweet(d, "retweet"); });
 
-    // add the x Axis
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x));
 
-    // add the y Axis
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -190)
+        .attr("y", -25)
+        .attr("text-anchor", "middle")
+        .text("Tweets"); 
+    
+        /*
     svg.append("g")
         .call(d3.axisLeft(y));
-
-}
-
-/*
-function brytOppTekst(str) {
-    var result = '';
-    while (str.length > 0) {
-        result += str.substring(0, 200) + '\r\n';
-        str = str.substring(200);
-    }
-    return result;
-}
 */
+}

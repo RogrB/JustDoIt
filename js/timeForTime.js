@@ -73,6 +73,19 @@ function tegnLineChart(timeData) {
         .attr("x", 9)
         .attr("dy", ".35em");
 
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -190)
+        .attr("y", -35)
+        .attr("text-anchor", "middle")
+        .text("Antall Tweets");
+
+    svg.append("text")
+        .attr("x", svg.node().getBBox().width/2 - 60)
+        .attr("y", svg.node().getBBox().height)
+        .attr("text-anchor", "middle")
+        .text("Time");
+
 }
 
 

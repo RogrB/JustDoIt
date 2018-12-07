@@ -75,8 +75,15 @@ function tegnFavoritterBarChart(favoritter) {
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x));
 
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -190)
+        .attr("y", -25)
+        .attr("text-anchor", "middle")
+        .text("Tweets");        
+        /*
     svg.append("g")
-        .call(d3.axisLeft(y));
+        .call(d3.axisLeft(y));*/
 
 }
 
